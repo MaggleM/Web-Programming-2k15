@@ -66,7 +66,7 @@
                     
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuein="0" aria-valuemax="100" style="width: 15%">
-                            <span>45% complete</span>
+                            <span><span id="baramount">45</span>% complete</span>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(".progressbar").animate({width: "75%"}, 2000);
+    
+    (function(){
+        $(".progress-bar").animate({width: $(".progress").width() * .75});
+        //alert($("#baramount").toString().innerHTML);
+        
+        someName = function() {
+          var intendedWith = $(".progress-bar").width() * .75;
+          $(".progress-bar").animate({width: myObject.intendedWith}, 2000);
+        }
+        
+        var myObject = {
+          hello: "World",
+          intendedWith: $(".progress-bar").width() * .75
+        };
+        
+        someName();
+        
+    })()
+        
+        //setTimeout(someName, 1000);
     </script>
   </body>
 </html>
