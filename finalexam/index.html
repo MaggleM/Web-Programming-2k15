@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Food Intake</title>
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+      <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js">
+       $(function(){
+          var g = require("../inc/global");
+          var conn = g.getConnection();
+           
+           
+          var data = ["Beef Stew", "Frosted Mini Wheats", "Magic Beans"];
+          var dbdata  = conn.query("SELECT * FROM Meals");
+          
+          $("#sTerm").autocomplete({
+              source: data
+          });
+           
+           
+          $("#sTerm").select2({ data: data });
+          var searchParam = $("#sTerm");
+      
+          var sql = "SELECT id, Name FROM Meals WHERE Name Like '%" + searchParam + "%'";
+          
+          //Test to see if the word that has been input will appear in the alert
+          $("#lert").on('click', function(){
+              alert(searchParam);
+          });
+          
+       });
+          
+          
+      </script>
+      
+  </head>
+    
+  <body>
+      
+      
+      <label for="sTerm">Type in a food: </label>
+      <input id="sTerm">
+      
+      <button id="lert">WHAT?</button>
+      
+      
+  </body>
+  
+  
+</html>
